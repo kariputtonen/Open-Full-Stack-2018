@@ -1,0 +1,19 @@
+Kayttaja->selain:
+note left of selain
+    käyttajä kirjottaa
+    fullstack-exampleapp.herokuapp.com/spa-sivulla
+    uuden muistiinpanon ja painaan Talleta-nappia
+end note
+
+note left of selain
+    Selain lisää uuden muistiinpanon spa.js-koodin
+    mukaisesti <div>-tägiin.
+end note
+
+selain->palvelin: POST fullstack-exampleapp.herokuapp.com/new_note_spa
+
+note left of palvelin
+    Palvelin tallentaa uuden muistiinpanon lähetetystä json-muodosta
+end note
+
+palvelin->selain: status 201, json-muotoinen vastaus: {"message":"note created"}

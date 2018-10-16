@@ -1,9 +1,10 @@
-kayttaja->selain:
+Kayttaja->selain:
 note left of selain
-    Käyttäjä kirjottaa osoiteriville
-    fullstack-exampleapp.herokuapp.com/notes
+käyttajä kirjottaa
+fullstack-exampleapp.herokuapp.com/notes-sivulla
+uuden muistiinpanon ja painaan Talleta-nappia
 end note
-selain->palvelin: GET fullstack-exampleapp.herokuapp.com/notes
+selain->palvelin: POST fullstack-exampleapp.herokuapp.com/new_note
 
 note left of palvelin
   muodostetaan HTML sisältäen tägit
@@ -11,29 +12,33 @@ note left of palvelin
 end note
 
 palvelin->selain: status 200, sivun HTML-koodi
-
 note left of selain
     Selain saa notes-sivun HTML:n
 end note
 
 selain->palvelin: GET fullstack-exampleapp.herokuapp.com/main.css
-palvelin->selain: status 200, main.css
+palvelin->selain: status 200, main.css-tyylitiedosto
 note left of selain
     Selain saa main.css-tyylitiedoston sivun muotoiluun
 end note
 
+
+
 selain->palvelin: GET fullstack-exampleapp.herokuapp.com/main.js
-palvelin->selain: status 200, main.js
+palvelin->selain: status 200, main.js-javascript
+
 note left of selain
     Selain saa main.js-koodin.
     Tällä muodostetaan muistiinpanorivit
 end note
 
 
+
 selain->palvelin: GET main.js pyytää muistiinpanoja palvelimelta
 palvelin->selain: muistiinpanot palautuvat data.json-muodossa
 
 note left of selain
-    selain lisää palvelimen palauttaman HTML:n
-    <div id='notes'></div>-tägin väliin muistiinpanot
+ selain lisää main.js:llä palvelimen
+ palauttamat .json-muotoiset muistiinpanot
+ <div id='notes'></div>-tägin väliin
 end note

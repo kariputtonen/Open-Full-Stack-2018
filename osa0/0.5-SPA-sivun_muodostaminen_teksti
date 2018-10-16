@@ -1,0 +1,45 @@
+Kayttaja->selain:
+note left of selain
+käyttajä kirjottaa selaimeen
+fullstack-exampleapp.herokuapp.com/spa-osoitteen
+
+end note
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/spa
+
+note left of palvelin
+  muodostetaan pavelimella index.js:llä HTML sisältäen tägit
+  <div class='container'> ja <div id='notes_form'>
+end note
+
+palvelin->selain: status 200, sivun HTML-koodi
+note left of selain
+    Selain saa spa-sivun HTML:n
+end note
+
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/main.css
+palvelin->selain: status 200, main.css-tyylitiedosto
+note left of selain
+    Selain saa main.css-tyylitiedoston sivun muotoiluun
+end note
+
+
+
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/spa.js
+palvelin->selain: status 200, spa.js-javascript
+
+note left of selain
+    Selain saa spa.js-koodin.
+    Tällä lähetetään uudet muistiinpanot palvelimelle,
+    sekä lisätään uudet rivit selaimen <div>-tägiin
+end note
+
+
+
+selain->palvelin: GET spa pyytää muistiinpanoja palvelimelta
+palvelin->selain: status 201, muistiinpanot palautuvat data.json-muodossa
+
+note left of selain
+ selain lisää spa:llä palvelimen
+ palauttamat .json-muotoiset muistiinpanot
+ <div id='notes'></div>-tägin väliin
+end note
