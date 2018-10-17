@@ -1,0 +1,56 @@
+Osa 1
+
+Osan 1 oppimistavoitteet
+React
+  funktiona ja luokkana määriteltävät komponentit
+  tietojen ja funktioiden välittäminen lapsikomponentteihin propseina
+  komponentin tila
+  tilan päivittämisen periaatteet
+  tapahtumankäsittelyn perusteet
+Javascript
+  muuttujien määrittely
+  taulukko ja sen operaatiot (mm. concat, forEach, join ja map)
+  literaalisyntaksilla määritellyt oliot
+  funktioiden määrittely
+  this:in käyttäytyminen
+  funktioita palauttavat funktiot
+  luokkasyntaksi
+  class propertynä määritellyt metodit
+
+Aloitus:
+  Luodaan sovellus nimeltään osa1 ja käynnistetään se:
+
+    $ npx create-react-app osa1
+
+    Mutta ongelmia heti:
+    error eslint@5.6.0: The engine "node" is incompatible with this module.
+    Expected version "^6.14.0 || ^8.10.0 || >=9.10.0". Got "9.3.0"
+    error Found incompatible module
+    info Visit https://yarnpkg.com/en/docs/cli/add for documentation about this command.
+
+    Ja päivitysyritykset:
+    sudo apt-get upgrade nodejs
+    nodejs is already the newest version (8.10.0~dfsg-2ubuntu0.3).
+
+    Mutta:
+    $ node --version
+    v9.3.0 (tämä viittaa paikalliseen hakemistoon)
+    $ nodejs --version
+    v8.10.0
+
+    asennusyritys:
+      https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-18-04
+      komennolla (node version manager) "nvm ls-remote" versiohistoria ->
+       v8.12.0 (Latest LTS: Carbon)
+      $ nvm install 8.12.0 (Eli periaatteessa downgreidasin)
+      --> Nyt sovelluksen luonti lähti eteenpäin.
+      $ which node
+        /home/iot/.nvm/versions/node/v8.12.0/bin/node
+
+      $ npm start
+      ---> Serveri käynnistyy -> selainkin ohjautui automaattisesti http://localhost:3000/
+
+      HUOMIO! Samaan porttiin ei voi käynnistää toista serveriä! Eli sain omituisia
+      virheilmoituksia , koska selain oli vielä auki vanhasta paikasta.
+
+Sitten Javascriptin pariin.
