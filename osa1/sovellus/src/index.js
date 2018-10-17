@@ -10,48 +10,50 @@ const Otsikko = (props) => {
 }
 const Sisalto = (props) => {
 //  Ei kovin kaunista, mutta en vielä osaa tehdä oikein
+// nyt kyllä tahmaa eteneminen. En ymmärrä kuinka tuo oliotaulukko tänne välitettäisiin.
+// ja ilmeisesti selvisi tyyliin: {props.osat[0].nimi}
   return (
     <div>
-      <Osa kurssinosa={props.kurssinosa} tehtavia={props.tehtavia} />
-
+      <Osa kurssinosa={props.osat[0].nimi} tehtavia={props.osat[0].tehtavia} />
+      <Osa kurssinosa={props.osat[1].nimi} tehtavia={props.osat[1].tehtavia} />
+      <Osa kurssinosa={props.osat[2].nimi} tehtavia={props.osat[2].tehtavia} />
     </div>
   )
 }
 const Osa = (props) => {
   return (
-    <p>{props.kurssinosa}: {props.tehtavia} tehtävää</p>
+    <p><li>{props.kurssinosa}: {props.tehtavia} tehtävää</li></p>
   )
 
 }
 const Yhteensa = (props) => {
   return (
     <div>
-      <p>Yhteensä {props.tehtavia} tehtävää</p>
+      <p>Yhteensä {props.osat[0].tehtavia + props.osat[1].tehtavia + props.osat[2].tehtavia} tehtävää</p>
     </div>
   )
 }
 const App = () => {
   const kurssi = 'Half Stack -sovelluskehitys'
-  const osa1 = {
-    nimi: 'Reactin perusteet',
-    tehtavia: 10
-  }
-  const osa2 = {
-    nimi: 'Tiedonvälitys propseilla',
-    tehtavia: 7
-  }
-  const osa3 = {
-    nimi: 'Komponenttien tila',
-    tehtavia: 14
-  }
-
-  return (
+  const osat = [
+    {
+      nimi: 'Reactin perusteet',
+      tehtavia: 10
+    },
+    {
+      nimi: 'Tiedonvälitys propseilla',
+      tehtavia: 7
+    },
+    {
+      nimi: 'Komponenttien tila',
+      tehtavia: 14
+    }
+  ]
+return (
     <div>
       <Otsikko kurssi={kurssi} />
-      <Sisalto kurssinosa={osa1.nimi} tehtavia={osa1.tehtavia}/>
-      <Sisalto kurssinosa={osa2.nimi} tehtavia={osa2.tehtavia}/>
-      <Sisalto kurssinosa={osa3.nimi} tehtavia={osa3.tehtavia}/>
-      <Yhteensa tehtavia={osa1.tehtavia + osa2.tehtavia + osa3.tehtavia} />
+      <Sisalto osat={osat} />
+      <Yhteensa osat={osat} />
     </div>
   )
 }
