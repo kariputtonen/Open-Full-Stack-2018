@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 const Otsikko = (props) => {
   return (
     <div>
-      <h1>{props.kurssi} - sovelluskehitys</h1>
+      <h1>{props.kurssi}</h1>
     </div>
   )
 }
@@ -12,9 +12,8 @@ const Sisalto = (props) => {
 //  Ei kovin kaunista, mutta en vielä osaa tehdä oikein
   return (
     <div>
-      <Osa kurssinosa={props.kurssinosa[0]} tehtavia={props.tehtavia[0]} />
-      <Osa kurssinosa={props.kurssinosa[1]} tehtavia={props.tehtavia[1]} />
-      <Osa kurssinosa={props.kurssinosa[2]} tehtavia={props.tehtavia[2]} />
+      <Osa kurssinosa={props.kurssinosa} tehtavia={props.tehtavia} />
+
     </div>
   )
 }
@@ -32,14 +31,27 @@ const Yhteensa = (props) => {
   )
 }
 const App = () => {
-  const kurssi = 'Half Stack'
-  const osat = ['Reactin perusteet', 'Tiedonvälitys propseilla', 'Komponenttien tila']
-  const tehtavat = [10, 7, 14]
+  const kurssi = 'Half Stack -sovelluskehitys'
+  const osa1 = {
+    nimi: 'Reactin perusteet',
+    tehtavia: 10
+  }
+  const osa2 = {
+    nimi: 'Tiedonvälitys propseilla',
+    tehtavia: 7
+  }
+  const osa3 = {
+    nimi: 'Komponenttien tila',
+    tehtavia: 14
+  }
+
   return (
     <div>
       <Otsikko kurssi={kurssi} />
-      <Sisalto kurssinosa={osat} tehtavia={tehtavat}/>
-      <Yhteensa tehtavia={tehtavat[0] + tehtavat[1] + tehtavat[2]} />
+      <Sisalto kurssinosa={osa1.nimi} tehtavia={osa1.tehtavia}/>
+      <Sisalto kurssinosa={osa2.nimi} tehtavia={osa2.tehtavia}/>
+      <Sisalto kurssinosa={osa3.nimi} tehtavia={osa3.tehtavia}/>
+      <Yhteensa tehtavia={osa1.tehtavia + osa2.tehtavia + osa3.tehtavia} />
     </div>
   )
 }
