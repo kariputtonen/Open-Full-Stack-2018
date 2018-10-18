@@ -51,6 +51,88 @@ Aloitus:
       ---> Serveri käynnistyy -> selainkin ohjautui automaattisesti http://localhost:3000/
 
       HUOMIO! Samaan porttiin ei voi käynnistää toista serveriä! Eli sain omituisia
-      virheilmoituksia , koska selain oli vielä auki vanhasta paikasta.
+      virheilmoituksia , koska selain oli vielä auki vanhasta paikasta. Ei se
+      nyt siitä johtunutkaan! Taas tulee virheilmoitusta, vaikkei olekaan
+      toista serveriä, olen nimittäin bootannut linuxin tässä välissä.
+
+      Löytyi tällä kertaa toimiva loitsu:
+      $ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+      Lisää selitystä: https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers#the-technical-details
+      Olisiko syynä se, etten ole lopettanut nodea siististi ja noden
+      pyöritykseen käytetään mielettömästi eri tiedostoja?
+
 
 Sitten Javascriptin pariin.
+
+      Olioiden esittelyä ja käyttöä
+        - alkuun oli kankeutta mm. pistenotaatiossa oliotaulukossa
+
+      "Luokkien" käyttö
+        Tämän kurssin puitteissa niitä ei kuitenkaan juuri käytetä, vaan pyritään
+        enemmän funktionaaliseen ohjelmointiin.
+
+      Renderöintiä
+
+      Tapahtumankäsittelyä
+        - esimerkkinä hiirellä napin painaminen
+        - Napille on lisättävä tapahtumankäsittelijä
+        - Tapahtumankäsittelijän tulee olla aina funktio! (ei siis esim. funktiokutsu)
+        - osa1:n lopussa on tiiviisti kertausta tästä
+        - esimerkissä mm. useamman napin käyttö "funktioita palauttavilla fuktioilla"
+        
+
+      Metodien käyttö ja this
+        - esim. aiemmin mainittu .bind(this)
+        Tehdään tässä konstruktorissa:
+        this.kasvataYhdella = this.kasvataYhdella.bind(this)
+        this.nollaa = this.nollaa.bind(this)
+        -> heti perään kylläkin viitattiin nuolifunktioratkaisuun uudessa JS-standardissa esim:
+        kasvataYhdella = () => {
+          this.setState({ counter: this.state.counter + 1 })
+        }
+        - Ylläolevaan käytetään tällä kurssilla!
+        Sama tarkastellen edellistä tilaa:
+        this.setState((prevState) => ({
+          counter: prevState.counter + 1
+        }));
+        - Tärkeä mielessä pidettävä seikka on myös, se että React kutsuu funktiota setState asynkroonisesti
+
+      Funktio joka palauttaa funktion
+        - tässä esimerkissä varoiteltiinkin, että vaatii kikka totuttelua.
+        Kyllä vain, melkoisen hämärä on tuo. Ei aukea toisellakaan lukemisella.
+        Esimerkkirivi: asetaArvoon = (arvo) => () => this.setState({ counter: arvo })
+        - Tässä näytetty tapa soveltaa funktioita palauttavia funktioita on
+        oleellisesti sama asia mistä funktionaalisessa ohjelmoinnissa käytetään termiä currying.
+
+      Tilan vieminen alikomponenttiin
+        - esimerkissä tehtiin "uudelleenkäytettävä nappi"
+
+      Monimutkaisemman tilan päivittäminen
+        - esimerkissä pari nappia, joilla päivitettiin eri kenttien arvoja
+
+      Taulukon käsittelyä
+        - Esim: Tilan kenttä kaikki saa nyt arvokseen entisen tilan, mihin on liitetty
+        v metodilla concat, joka toimii siten, että se ei muuta olemassaolevaa taulukkoa
+        vaan luo uuden taulukon, mihin uusi alkio on lisätty.
+        - Jos tilan kentissä on olioita, älä muuta niitä vaan tee muutos aina kopioon!
+
+      Ehdollinen renderöinti
+        - en saanut sulkuja kohdilleen esimerkissä tai sitten sovellus kaipasi renderiä
+
+      Hyviä vihjeitä:
+        - vanha kunnon konsoliin printtaus esim:
+        const Button = (props) => {
+          console.log(props)
+          const { handleClick, text } = props
+          return (
+            <button onClick={handleClick}>
+              {text}
+            </button>
+          )
+        }
+        - Kirjoittaa koodin sekaan
+
+          debugger
+
+        ...suoritus pysähtyy tuohon ja on mahdollista tutkia selaimen kehittäjä-
+        ikkunassa esim. muuttujien tilaa
