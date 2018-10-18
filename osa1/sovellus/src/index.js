@@ -1,65 +1,68 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-const Otsikko = (props) => {
-  return (
-    <div>
-      <h1>{props.kurssi.nimi}</h1>
-    </div>
-  )
-}
-const Sisalto = (props) => {
-//  Ei kovin kaunista, mutta en vielä osaa tehdä oikein
-// nyt kyllä tahmaa eteneminen. En ymmärrä kuinka tuo oliotaulukko tänne välitettäisiin.
-// ja ilmeisesti selvisi tyyliin: {props.osat[0].nimi}
-// Ja sitten laajennettiin kurssio-olion mallia ja lisätään piste-notaatioita
-  return (
-    <div>
-      <Osa kurssinosa={props.kurssi.osat[0].nimi} tehtavia={props.kurssi.osat[0].tehtavia} />
-      <Osa kurssinosa={props.kurssi.osat[1].nimi} tehtavia={props.kurssi.osat[1].tehtavia} />
-      <Osa kurssinosa={props.kurssi.osat[2].nimi} tehtavia={props.kurssi.osat[2].tehtavia} />
-    </div>
-  )
-}
-const Osa = (props) => {
-  return (
-    <p><li>{props.kurssinosa}: {props.tehtavia} tehtävää</li></p>
-  )
+// Sovellus: Kolme nappia, jotka lisäävät painettaessa oman lokeronsa määrä
+// ja näistä syötteistä lasketaan keskiarvo
 
-}
-const Yhteensa = (props) => {
+// Nämä on tulevaisuutta varten varalla:
+/*const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
+    {text}
+  </button>
+)
+const Display = ({ counter }) => {
   return (
-    <div>
-      <p>Yhteensä {props.kurssi.osat[0].tehtavia + props.kurssi.osat[1].tehtavia + props.kurssi.osat[2].tehtavia} tehtävää</p>
-    </div>
+    <div>{counter}</div>
   )
-}
-const App = () => {
-  const kurssi = {
-    nimi: 'Half Stack -sovelluskehitys',
-    osat: [
-      {
-        nimi: 'Reactin perusteet',
-        tehtavia: 10
-      },
-      {
-        nimi: 'Tiedonvälitys propseilla',
-        tehtavia: 7
-      },
-      {
-        nimi: 'Komponenttien tila',
-        tehtavia: 14
-      }
-    ]
+}*/
+
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      hyva: 0,
+      neutraali: 0,
+      huono: 0
+    }
   }
-return (
-    <div>
-      <Otsikko kurssi={kurssi} />
-      <Sisalto kurssi={kurssi} />
-      <Yhteensa kurssi={kurssi} />
-    </div>
-  )
+
+  klikHyva = () => {
+    this.setState({
+      hyva: this.state.hyva + 1
+    })
+  }
+
+  klikNeutraali = () => {
+    this.setState({
+      neutraali: this.state.neutraali + 1
+    })
+  }
+
+  klikHuono = () => {
+    this.setState({
+      huono: this.state.huono + 1
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <div>
+          <h1>Anna palautetta</h1>
+          <button onClick={this.klikHyva}>Hyvä</button>
+          <button onClick={this.klikNeutraali}>Neutraali</button>
+          <button onClick={this.klikHuono}>Huono</button>
+          <h1>Statistiikka</h1>
+          <p>Hyvä: {this.state.hyva}</p>
+          <p>Neutraali: {this.state.neutraali}</p>
+          <p>Huono: {this.state.huono}</p>
+        </div>
+      </div>
+    )
+  }
 }
+
+
 ReactDOM.render(
   <App />,
   document.getElementById('root')
