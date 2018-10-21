@@ -79,7 +79,7 @@ Sitten Javascriptin pariin.
         - Tapahtumankäsittelijän tulee olla aina funktio! (ei siis esim. funktiokutsu)
         - osa1:n lopussa on tiiviisti kertausta tästä
         - esimerkissä mm. useamman napin käyttö "funktioita palauttavilla fuktioilla"
-        
+
 
       Metodien käyttö ja this
         - esim. aiemmin mainittu .bind(this)
@@ -136,3 +136,8 @@ Sitten Javascriptin pariin.
 
         ...suoritus pysähtyy tuohon ja on mahdollista tutkia selaimen kehittäjä-
         ikkunassa esim. muuttujien tilaa
+
+      Harjoitus 1.7 haasteita:
+        - En keksinyt varmankaan sitä "oikeaa" tapaa tuoreiden painallusten
+        saamiseksi mukaan mm. keskiarvolaskuihin. Käytin argumentteja kutssun.
+        - Ilmeisesti täytyy löytää tapa "enumeroida" arvot 1, 0, -1
