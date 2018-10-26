@@ -4,30 +4,25 @@ import ReactDOM from 'react-dom'
 // Sovellus: Sama kuin 1.7, mutta siirretään toimintoja eri komponentteihin
 
 const Button = ({ handleClick, text }) => (
+  
   <button onClick={handleClick}>
     {text}
   </button>
-
 )
-function Statistics()  {
+// Nämä Statistiikka-komponentit voisivat olla jollain tapaa
+// kyllä dynaamisempia. Mutta näidenkin tappeluun kului
+// aidosti monta päivää aikaa! En vaan osaa.
+function Statistics(props)  {
   return (
     <div>
-      <h1>Statistiikka</h1>
-      <Statistic tila="hyva" text="Hyvä" />
-      // Nämä siis pitäisi saada siistimmäksi:
-      <p>Hyvä: {this.state.hyva}</p>
-        <p>Neutraali: {this.state.neutraali}</p>
-        <p>Huono: {this.state.huono}</p>
-        <p>Keskiarvo: {this.state.keskiarvo}</p>
-        <p>Positiivisia: {this.state.positiivisia} %</p>
+      <Statistic tila={props.tila} text={props.text} paate={props.paate}/>
     </div>
   )
 }
 function Statistic(props) {
-  console.log(props.tila, props.text)
   return (
     <div>
-      <p>{props.tila} {props.text}</p>
+      <p>{props.text} {props.tila} {props.paate}</p>
     </div>
   )
 }
@@ -70,22 +65,32 @@ class App extends React.Component {
     })
   }
   pyorista = (x, y) => {
-    console.log(Number.parseFloat(x).toFixed(y))
+    // console.log(Number.parseFloat(x).toFixed(y))
     return Number.parseFloat(x).toFixed(y);
   }
   render() {
-debugger
+// Kyllä tähän jotain järkeäkin pitäisi saada
+// Vaikka tuossa kutsunkin erinäisiä komponentteja, niin
+// koodi on sellaista copy-pastea, että alta pois. Looppeja?
+// Nappien luonti oli myös tahmeaa, en keksinyt tapaa kuin
+// kysymällä asiasta facebookissa kavereilta. Ei tämä opiskelu
+// ihan vielä suju.
     return (
 
       <div>
         <div>
           <h1>Anna palautetta</h1>
-          <Button onClick={this.asetaArvoon(1, 0, 0)} text="Hyvä" />
-          <Button onClick={this.asetaArvoon(0, 1, 0)} text="Neutraali" />
-          <Button onClick={this.asetaArvoon(0, 0, 1)} text="Huono" />
+          <Button handleClick={() => this.asetaArvoon(1, 0, 0)} text="Hyvä" />
+          <Button handleClick={() => this.asetaArvoon(0, 1, 0)} text="Neutraali" />
+          <Button handleClick={() => this.asetaArvoon(0, 0, 1)} text="Huono" />
 
-          <Statistics  />
-
+          <h1>Statistiikka</h1>
+          <Statistics tila={this.state.hyva} text="Hyvä" />
+          <Statistics tila={this.state.neutraali} text="Neutraali" />
+          <Statistics tila={this.state.huono} text="Huono" />
+          <Statistics tila={this.state.keskiarvo} text="Keskiarvo" />
+          <Statistics tila={this.state.positiivisia} text="Positiivisia" paate="%" />
+          
         </div>
       </div>
     )
