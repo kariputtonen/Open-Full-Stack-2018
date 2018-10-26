@@ -75,6 +75,8 @@ class App extends React.Component {
 // Nappien luonti oli myös tahmeaa, en keksinyt tapaa kuin
 // kysymällä asiasta facebookissa kavereilta. Ei tämä opiskelu
 // ihan vielä suju.
+// Nuo tilat pitää siis tosiaan käsittääkseni ojentaa komponenteille
+// yksitellen, eikä vain voi heittää oliota sinne?
     return (
 
       <div>
