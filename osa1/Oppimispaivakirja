@@ -151,3 +151,7 @@ Sitten Javascriptin pariin.
         tehtyä edes välttävät Statistics-komponentit. Ehkä täyttää
         tehtävänmäärittelyn, vaikkeivat ole mitenkään kaunista niiden
         kutsuminen.
+
+!!! .gitignore-tiedoston käyttö on vielä hakusessa, Githubiin meni nyt paljon
+roskaa joita olin ehkä muokannut jossain vaiheessa enkä oikein uskalla
+poistaa niitä kummallakaan puolella.
