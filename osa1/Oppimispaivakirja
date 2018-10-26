@@ -141,3 +141,13 @@ Sitten Javascriptin pariin.
         - En keksinyt varmankaan sitä "oikeaa" tapaa tuoreiden painallusten
         saamiseksi mukaan mm. keskiarvolaskuihin. Käytin argumentteja kutssun.
         - Ilmeisesti täytyy löytää tapa "enumeroida" arvot 1, 0, -1
+
+      Harjoitus 1.8 runsaasti taistelua:
+        - En saanut ensin mielestäni sujuvaksi keksimääni napinluontia 
+        toimimaan järkevästi. Napin alla ollut koodi tahdoi lähteä
+        käyntiin jo renderöintivaiheessa. Tyhjän funktion tekeminen
+        auttoi asiaan.
+        - Sitten vaati paljon pään laittoa puun runkoon, jotta sain 
+        tehtyä edes välttävät Statistics-komponentit. Ehkä täyttää
+        tehtävänmäärittelyn, vaikkeivat ole mitenkään kaunista niiden
+        kutsuminen.
