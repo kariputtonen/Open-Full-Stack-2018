@@ -139,7 +139,7 @@ Sitten Javascriptin pariin.
 
       Harjoitus 1.7 haasteita:
         - En keksinyt varmankaan sitä "oikeaa" tapaa tuoreiden painallusten
-        saamiseksi mukaan mm. keskiarvolaskuihin. Käytin argumentteja kutssun.
+        saamiseksi mukaan mm. keskiarvolaskuihin. Käytin argumentteja kutsuun.
         - Ilmeisesti täytyy löytää tapa "enumeroida" arvot 1, 0, -1
 
       Harjoitus 1.8 runsaasti taistelua:
@@ -147,11 +147,22 @@ Sitten Javascriptin pariin.
         toimimaan järkevästi. Napin alla ollut koodi tahdoi lähteä
         käyntiin jo renderöintivaiheessa. Tyhjän funktion tekeminen
         auttoi asiaan.
+        - Ylläoleva asia on käsitelty materiaalissa useasti, mutta sen
+        mieleenpainaminen vaati tuskaa ja jälkijättöistä löytämisen iloa
+        materiaalia uudelleen selatessa. Virheistä oppii ja näin ne jää 
+        parhaiten mieleen. "Määritellään funktio joka palauttaa funktion"
         - Sitten vaati paljon pään laittoa puun runkoon, jotta sain 
         tehtyä edes välttävät Statistics-komponentit. Ehkä täyttää
         tehtävänmäärittelyn, vaikkeivat ole mitenkään kaunista niiden
         kutsuminen.
 
-!!! .gitignore-tiedoston käyttö on vielä hakusessa, Githubiin meni nyt paljon
+!!!  .gitignore-tiedoston käyttö on vielä hakusessa, Githubiin meni nyt paljon
 roskaa joita olin ehkä muokannut jossain vaiheessa enkä oikein uskalla
 poistaa niitä kummallakaan puolella.
+
+      Harjoitus 1.9:
+        - tehtävä muutoin oli erittäin helppo, mutta sovelluksen käynnistämisen
+        yhteydessä viisinkertainen "Ei yhtään..."-tuloste oli haaste:
+        - Kesti jälleen kauan hokata Tuo ehdollinen renderöinti
+        - Yritin ensin tehdä ratkaisua funktioihin, mutta meni liian mutkikkaaksi
+

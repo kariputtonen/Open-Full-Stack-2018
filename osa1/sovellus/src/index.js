@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-// Sovellus: Sama kuin 1.7, mutta siirretään toimintoja eri komponentteihin
+// Sovellus: Tekstin tulostus lisää, mikäli ei ole vielä syötteitä
 
 const Button = ({ handleClick, text }) => (
   
@@ -9,13 +9,23 @@ const Button = ({ handleClick, text }) => (
     {text}
   </button>
 )
-// Nämä Statistiikka-komponentit voisivat olla jollain tapaa
-// kyllä dynaamisempia. Mutta näidenkin tappeluun kului
-// aidosti monta päivää aikaa! En vaan osaa.
+// (Koetan muuntaa tämän luokaksi, jotta saan sille tarpeellisen tilan
+// merkitsemään, jos "Ei yhtään annettua palautetta."-teksti on jo tulostettu
+// Yksinkertaisella toiminnolla sai tuon tekstin tulostumaan useasti, mikä ei ole hyvä.)
+// Jos nyt kuitenkin pidän asiat yksinkertaisena ja teen tuon tarkastelun
+// yksinkertaisesti tuolla App-luokassa.
 function Statistics(props)  {
+  let tilasto = "" // Taas tällainen omituinen esittely, jolla sain koodin toimimaan
+  if (props.yht > 0) {
+    // console.log("Yhteensä": props.yht)
+    tilasto = <Statistic tila={props.tila} text={props.text} paate={props.paate}/>
+  } else {
+    // tähän nyt ei mennä koskaan, mutta jääköön tulevaa varten tähän
+    tilasto = <p>Ei yhtään annettua palautetta.</p>
+  }
   return (
     <div>
-      <Statistic tila={props.tila} text={props.text} paate={props.paate}/>
+      {tilasto}
     </div>
   )
 }
@@ -27,6 +37,8 @@ function Statistic(props) {
   )
 }
 class App extends React.Component {
+ // lisättiin yhteensä - merkitsemään onko vielä tullut palautteista
+ // tulostettutyhja - merkitsemään, onko jo tulostettu teksti "Ei yhtään annettua palautetta."
   constructor(props) {
     super(props)
     this.state = {
@@ -34,32 +46,28 @@ class App extends React.Component {
       neutraali: 0,
       huono: 0,
       keskiarvo: 0,
-      positiivisia: 0
+      positiivisia: 0,
+      yhteensa: 0
     }
   }
 
-  // Klikkausten laskentatoiminnot
   asetaArvoon = (hyva, neutraali, huono) => {
     debugger
     this.setState({
       hyva: this.state.hyva + hyva,
       neutraali: this.state.neutraali + neutraali,
-      huono: this.state.huono + huono
+      huono: this.state.huono + huono,
+      yhteensa: this.state.yhteensa + 1
     })
-
     this.laskeStats(hyva, neutraali, huono)
   }
 
-  // Tähän laskeStats()-funtioon piti siis lisätä argumentit (hyva, neutraali, huono),
-  // jotta saatiin juuri painettu tila mukaan laskuihin.
   laskeStats = (hyva, neutraali, huono) => {
-
-    let ka; // täytyykö nämä tosiaan esitellä näin? - tuli ruikutusta suorasta sijoituksesta
+    let ka; 
     ka = this.pyorista(((this.state.hyva+hyva) + (-(this.state.huono+huono)))/((this.state.hyva+hyva) +(this.state.neutraali+neutraali) + (this.state.huono+huono)), 2);
     let pos;
     pos = this.pyorista(100*(((this.state.hyva+hyva)/((this.state.hyva+hyva) + (this.state.neutraali+neutraali) + (this.state.huono+huono)))), 2)
     this.setState( {
-      // Hieman rumasti tuo yhtälö rakennettu, mutta kelvatkoon. Meniköhän oikein?
       keskiarvo: ka,
       positiivisia: pos
     })
@@ -68,29 +76,40 @@ class App extends React.Component {
     // console.log(Number.parseFloat(x).toFixed(y))
     return Number.parseFloat(x).toFixed(y);
   }
+  // Tein tähän siis ehdollisen renderöinnin. Viite materiaaliin hakusanalla.
   render() {
-// Kyllä tähän jotain järkeäkin pitäisi saada
-// Vaikka tuossa kutsunkin erinäisiä komponentteja, niin
-// koodi on sellaista copy-pastea, että alta pois. Looppeja?
-// Nappien luonti oli myös tahmeaa, en keksinyt tapaa kuin
-// kysymällä asiasta facebookissa kavereilta. Ei tämä opiskelu
-// ihan vielä suju.
+    const historia = () => {
+      // console.log(this.state.yhteensa)
+      if (this.state.yhteensa === 0) {
+        return (
+          <div>
+            <p>Ei yhtään annettua palautetta.</p>
+          </div>
+        )
+      } else {
+        return (
+          <div>
+            <Statistics tila={this.state.hyva} text="Hyvä" yht={this.state.yhteensa}/>
+            <Statistics tila={this.state.neutraali} text="Neutraali" yht={this.state.yhteensa}/>
+            <Statistics tila={this.state.huono} text="Huono" yht={this.state.yhteensa}/>
+            <Statistics tila={this.state.keskiarvo} text="Keskiarvo" yht={this.state.yhteensa}/>
+            <Statistics tila={this.state.positiivisia} text="Positiivisia" paate="%" yht={this.state.yhteensa}/>
+          </div>
+        )
+      }
+    }  
+  
     return (
-
       <div>
         <div>
           <h1>Anna palautetta</h1>
           <Button handleClick={() => this.asetaArvoon(1, 0, 0)} text="Hyvä" />
           <Button handleClick={() => this.asetaArvoon(0, 1, 0)} text="Neutraali" />
           <Button handleClick={() => this.asetaArvoon(0, 0, 1)} text="Huono" />
-
+        </div>
+        <div>
           <h1>Statistiikka</h1>
-          <Statistics tila={this.state.hyva} text="Hyvä" />
-          <Statistics tila={this.state.neutraali} text="Neutraali" />
-          <Statistics tila={this.state.huono} text="Huono" />
-          <Statistics tila={this.state.keskiarvo} text="Keskiarvo" />
-          <Statistics tila={this.state.positiivisia} text="Positiivisia" paate="%" />
-          
+          {historia()}
         </div>
       </div>
     )
