@@ -166,3 +166,66 @@ poistaa niitä kummallakaan puolella.
         - Kesti jälleen kauan hokata Tuo ehdollinen renderöinti
         - Yritin ensin tehdä ratkaisua funktioihin, mutta meni liian mutkikkaaksi
 
+      Harjoitus 1.10:
+        - Olen mielestäni jo tehnyt tehtävänannon vaatimukset
+
+!!! Nyt kohtasin ongelmia Visual Studio Coden kanssa:
+  - Sen Git-palikkaan oli ilmestynyt 5000 kpl (maksimäärä?)
+  muutoksia node_modules-hakemistosta! Mitähän tuolle
+  hässäkälle pitäisi tehtä?
+----
+  $git status
+  Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	node_modules/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+----
+
+Johtunee tuosta, että sovelluskaan ei taas toimi. Mitähän lie tapahtuu, jos
+vain kännistän ympäristön uudelleen: "serveri" ja editori?
+
+---clip---
+$~/Open-Full-Stack-2018/osa1/sovellus/src$ npm start
+npm ERR! path /home/iot/Open-Full-Stack-2018/osa1/sovellus/package.json
+npm ERR! code ENOENT
+npm ERR! errno -2
+npm ERR! syscall open
+npm ERR! enoent ENOENT: no such file or directory, open '/home/iot/Open-Full-Stack-2018/osa1/sovellus/package.json'
+npm ERR! enoent This is related to npm not being able to find a file.
+npm ERR! enoent 
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/iot/.npm/_logs/2018-11-14T05_34_01_513Z-debug.log
+---clip---
+
+---> Eli ei auta! Mikähän piru tuohon nyt iski? 
+
+- Yritin seuraavaa tuo node_modules-hakemiston poistamiseen gitistä:
+
+$:~/Open-Full-Stack-2018/osa1/sovellus$ git reset HEAD node_modules/.
+Unstaged changes after reset:
+M	osa1/Oppimispaivakirja
+
+---clip---
+iot@iot-VirtualBox:~/Open-Full-Stack-2018/osa1/sovellus$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   ../Oppimispaivakirja
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	node_modules/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+---clip---
+
+---> node_modules-hakemiston koko sisältö siis vielä roikkuu tuolla? (Kokeilin tuohon HEAD:iin
+myös eri variaatioita ja yhtä tiedostoa)
