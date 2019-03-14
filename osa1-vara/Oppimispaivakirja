@@ -254,14 +254,6 @@ systeemi vain ei käynnisty.
 -> eli hommana vanhojen asennusten poisto, uudet asennukset ja sitten 
 ylläoleva homma työtiedostojen palautuksesta ja gitit taas toimimaan
 
-VIHDOIN keräsin rohkeutta ja selvitin tuon ongelman:
-Eli asentelin nodet uudelleen tuon sivun ohjeiden mukaisesti paikalliseen
-hakemistooni: https://fullstackopen.github.io/asennusohjeita/
-
-Vähän tämä hakemistorakenne on pielessä, täytyy virtaviivaistaa osa2:ssa.
-Gitin toiminta on vielä testaamatta, jotain voi mennä siinä vielä pieleen.
-
-
 Tähän väliin tuli Black Friday:
 Sain vihjeen https://www.udemy.com/ -saitin tarjouksesta. 10 euroa/kurssi.
 Ostin kaksi tukemaan tätä oppimistani:
