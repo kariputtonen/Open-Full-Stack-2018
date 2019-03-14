@@ -282,4 +282,9 @@ tein tyhjän tägin, eikä tuosta ainakaan varoitusta tullut
 
 Tehtävä 1.12.
 
-- Siirsin array constin koodin alkuun, jotta satunnaistoiminto löytää kuinka monta niitä on tehty. 
+- Siirsin array constin koodin alkuun, jotta satunnaistoiminto löytää kuinka monta niitä on tehty.   
+
+Tehtävä 1.13 ja 14.
+
+- Anekdoottitehtävän laajennos: Lisätään äänestysominaisuus ja lasketaan kunkin anekdootin saamat äänet talteen. Lisäksi näytetään kulloinkin johtava anekdootti.
+- Annetuille anekdoottitaulukkoa vastaava toinen taulukko.

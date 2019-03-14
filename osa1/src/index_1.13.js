@@ -24,8 +24,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      selected: Math.floor(Math.random()*anecdotes.length),
-      johdossa: 0 // aluksi saadaan olettaa, että ensimmäinen on äänestyksen johdossa
+      selected: Math.floor(Math.random()*anecdotes.length)
     }
   }
 
@@ -39,21 +38,6 @@ class App extends React.Component {
     pisteet[this.state.selected] += 1 // lisätään ääni kyseiselle anekdootille
   }
 
-  // Mikäli on sama äänimäärä, tämä funktio valitsee eniten ääniä saaneeksi jälkimmäisen
-  haeEnitenAaniaSaanut = () => {
-    var i = 0
-    pisteet.forEach((aanet) => {
-      // pistetaulukosta verrataan äänimäärää ja osuessa vaihdetaan johtopaikka
-      if (aanet > pisteet[this.state.johdossa]) {
-        this.setState({
-          johdossa: i
-        })
-      }
-      i++ // seuraava äänimäärä tarkkailuun
-    })
-    return anecdotes[this.state.johdossa] // palautetaan kulloinkin johdossaoleva
-  }
-
   render() {
     return (
       <div>
@@ -61,20 +45,11 @@ class App extends React.Component {
           {this.props.anecdotes[this.state.selected]}
         </div>
         <div>
-          <br></br>
           Tämän saamat äänet: {pisteet[this.state.selected]}
-          <br></br>
-          <br></br>
         </div>
         <div>
           <Button handleClick={() => this.aanestaAnekdoottia()} text="Äänestä tätä" />
           <Button handleClick={() => this.satunnainenAnekdootti()} text="Seuraava anekdootti" />
-        </div>
-        <div>
-          <br></br>
-          <b>Eniten ääniä saanut:</b>
-          <br></br>
-           {this.haeEnitenAaniaSaanut()}
         </div>
       </div>
     )
