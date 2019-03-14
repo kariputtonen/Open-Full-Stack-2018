@@ -279,3 +279,7 @@ Tehtävä 1.11:
 
 - pieni knoppi: funktiosta paluuarvon pitää olla tägin sisällä, Tässä tapauksessa
 tein tyhjän tägin, eikä tuosta ainakaan varoitusta tullut
+
+Tehtävä 1.12.
+
+- Siirsin array constin koodin alkuun, jotta satunnaistoiminto löytää kuinka monta niitä on tehty.
