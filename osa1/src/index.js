@@ -1,87 +1,87 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
-// Anekdoottitehtävän laajennos: Lisätään äänestysominaisuus ja lasketaan kunkin anekdootin saamat äänet talteen
-
-const anecdotes = [
-  'If it hurts, do it more often',
-  'Adding manpower to a late software project makes it later!',
-  'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
-  'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
-  'Premature optimization is the root of all evil.',
-  'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
-]
-// Muodostetaan map-funktiolla anekdootteja vastaava taulukko äänille. Äänet aluksi nollaan.
-const pisteet = anecdotes.map((anekdootti) => 0)
-
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
-    {text}
-  </button>
-)
-
-class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      selected: Math.floor(Math.random()*anecdotes.length),
-      johdossa: 0 // aluksi saadaan olettaa, että ensimmäinen on äänestyksen johdossa
-    }
-  }
-
-  satunnainenAnekdootti = () => {
-    this.setState({
-      selected: Math.floor(Math.random()*anecdotes.length)
-    })
-  }
-
-  aanestaAnekdoottia = () => {
-    pisteet[this.state.selected] += 1 // lisätään ääni kyseiselle anekdootille
-  }
-
-  // Mikäli on sama äänimäärä, tämä funktio valitsee eniten ääniä saaneeksi jälkimmäisen
-  haeEnitenAaniaSaanut = () => {
-    var i = 0
-    pisteet.forEach((aanet) => {
-      // pistetaulukosta verrataan äänimäärää ja osuessa vaihdetaan johtopaikka
-      if (aanet > pisteet[this.state.johdossa]) {
-        this.setState({
-          johdossa: i
-        })
-      }
-      i++ // seuraava äänimäärä tarkkailuun
-    })
-    return anecdotes[this.state.johdossa] // palautetaan kulloinkin johdossaoleva
-  }
-
-  render() {
-    return (
-      <div>
-        <div>
-          {this.props.anecdotes[this.state.selected]}
-        </div>
-        <div>
-          <br></br>
-          Tämän saamat äänet: {pisteet[this.state.selected]}
-          <br></br>
-          <br></br>
-        </div>
-        <div>
-          <Button handleClick={() => this.aanestaAnekdoottia()} text="Äänestä tätä" />
-          <Button handleClick={() => this.satunnainenAnekdootti()} text="Seuraava anekdootti" />
-        </div>
-        <div>
-          <br></br>
-          <b>Eniten ääniä saanut:</b>
-          <br></br>
-           {this.haeEnitenAaniaSaanut()}
-        </div>
-      </div>
-    )
-  }
+// Nyt kakkososassa päästään siistimään ykkösosan osaamattomuuttani hieman.
+// Kakkososan alussa onkin esitelty map-funktio ja viittaus reducen käyttöön.
+  
+function Kurssi(props) {
+  return (
+    <div>
+      <Otsikko kurssi={props.kurssi} />
+      <Sisalto kurssi={props.kurssi} />
+      <Yhteensa kurssi={props.kurssi} />
+    </div>
+  )
+}
+const Otsikko = (props) => {
+  return (
+    <div>
+      <h1>{props.kurssi.nimi}</h1>
+    </div>
+  )
 }
 
+// map käyttöön: Materiaalista tämän "apinointiin" kului jokunen tovi. 
+// Erimerkki johdatti hieman "harhaan", enkä täysin ymmärtänyt konsoliin tulostuksen
+// ja koodin toimimattomuuden yhteyttä.
+const Sisalto = (props) => {
+  return (
+    <div>
+      {props.kurssi.osat.map(osa =>
+        <li key={osa.id}>
+         {osa.nimi}
+         {": "} 
+         {osa.tehtavia}
+        </li>
+      )}
+    </div>
+  )
+}
+
+const Yhteensa = (props) => {
+  // käytetään reducea tässä, joka tuli kuvioihin uutena mukaan ja vaadittiin t. 2.3
+  var summaaTehtavat = props.kurssi.osat.reduce(function(sum, osa) {
+    //console.log("Summaus", sum, osa)
+    return sum + osa.tehtavia
+  }, 0)
+  return (
+    <div>
+      <p>Yhteensä {summaaTehtavat} tehtävää</p>
+    </div>
+  )
+}
+const App = () => {
+  const kurssi = {
+    nimi: 'Half Stack -sovelluskehitys',
+    osat: [
+      {
+        nimi: 'Reactin perusteet',
+        tehtavia: 10,
+        id: 1
+      },
+      {
+        nimi: 'Tiedonvälitys propseilla',
+        tehtavia: 7,
+        id: 2
+      },
+      {
+        nimi: 'Komponenttien tila',
+        tehtavia: 14,
+        id: 3
+      },
+      {
+        nimi: 'Kikkelis kokkelis',
+        tehtavia: 42,
+        id: 4
+      }
+    ]
+  }
+return (
+    <div>
+      <Kurssi kurssi={kurssi} />
+    </div>
+  )
+}
 ReactDOM.render(
-  <App anecdotes={anecdotes} />,
+  <App />,
   document.getElementById('root')
 )
